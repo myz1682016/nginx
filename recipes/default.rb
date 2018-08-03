@@ -15,3 +15,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+package 'epel-release' do
+  action :install
+end
+
+package 'nginx' do
+  action :install
+end
+
+service 'nginx' do
+  action [ :enable, :start ]
+end
+
+template '/usr/share/nginx/html/index.html' do
+  source 'index.html.erb'
+  mode '0644'
+end
